@@ -108,4 +108,13 @@ def openai_chat_completion(question, model="gpt-3.5-turbo"):
     return completion.choices[0].message["content"]
 ```
 
+and update our `qa` endpoint to use this function:
+
+```python
+@app.get("/qa")
+def qa(question: str):
+    answer = openai_chat_completion(question)
+    return {"question": question, "answer": answer}
+```
+
 Test the endpoint again and verify that the answer to the ultimate question of life got slightly longer.
